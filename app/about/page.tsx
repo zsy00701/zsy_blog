@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="about-hero">
             <div>
               <p className="hero-eyebrow">你好，我是</p>
-              <h1 className="hero-title">()</h1>
+              <h1 className="hero-title">Zz</h1>
               <p className="hero-desc">
                 喜欢把思考写下来，记录技术、科研与生活观察。这里是我的小站，左侧是分组目录，右侧是正文分层展示，希望对你有用。
               </p>
