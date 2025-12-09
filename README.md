@@ -124,6 +124,18 @@ blog/
 - **新手推荐**：查看 [DEPLOY_STEP_BY_STEP.md](./DEPLOY_STEP_BY_STEP.md) - 一步一步详细教程
 - **快速参考**：查看 [DEPLOY.md](./DEPLOY.md) - 各平台部署说明和高级配置
 
+### 部署后添加文章
+
+查看 [HOW_TO_ADD_POSTS.md](./HOW_TO_ADD_POSTS.md) - 详细的添加文章指南，包含各种场景和最佳实践
+
+## 数据存储
+
+这个博客使用**文件系统**存储文章（不是传统数据库）：
+- 所有文章在 `content/posts/` 目录
+- 文件即数据，简单直观
+- 支持 Git 版本控制
+- 查看 [DATA_STORAGE.md](./DATA_STORAGE.md) 了解详细说明
+
 ## 自定义
 
 - **样式**：修改 `app/globals.css`

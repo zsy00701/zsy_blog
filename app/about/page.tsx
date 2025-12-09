@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="about-hero">
             <div>
               <p className="hero-eyebrow">你好，我是</p>
-              <h1 className="hero-title">周生遥</h1>
+              <h1 className="hero-title">()</h1>
               <p className="hero-desc">
                 喜欢把思考写下来，记录技术、科研与生活观察。这里是我的小站，左侧是分组目录，右侧是正文分层展示，希望对你有用。
               </p>
@@ -50,10 +50,13 @@ export default function AboutPage() {
             <div className="info-card">
               <h2>关注方向</h2>
               <div className="pill-list">
-                <span className="pill">Web 开发</span>
-                <span className="pill">前端工程化</span>
+                <span className="pill">大语言模型</span>
+                <span className="pill">多模态大模型</span>
                 <span className="pill">AI/科研工具</span>
                 <span className="pill">效率与写作</span>
+                <span className="pill">强化学习</span>
+                <span className="pill">自然语言编程</span>
+                <span className="pill">AI Agent</span>
               </div>
             </div>
             <div className="info-card">
