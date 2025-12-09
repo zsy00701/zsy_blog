@@ -62,20 +62,28 @@ export default function AboutPage() {
             <div className="info-card">
               <h2>常用技术</h2>
               <div className="pill-list">
-                <span className="pill">TypeScript</span>
-                <span className="pill">React / Next.js</span>
-                <span className="pill">Node.js</span>
+                <span className="pill">Python/Pytorch</span>
+                <span className="pill">c/cpp</span>
+                <span className="pill">FastAPI</span>
                 <span className="pill">Markdown / 文档</span>
+                <span className="pill">Cursor</span>
+                <span className="pill">ChatGPT</span>
+                <span className="pill">Claude</span>
+                <span className="pill">Gemini</span>
+                <span className="pill">DeepSeek</span>
+                <span className="pill">Qwen</span>
+                <span className="pill">LangChain</span>
+                <span className="pill">Grok</span>
               </div>
             </div>
             <div className="info-card">
               <h2>联系与合作</h2>
               <ul className="bullet-list">
                 <li>
-                  邮箱：<a href="mailto:yourname@example.com">yourname@example.com</a>
+                  邮箱：<a href="mailto:yourname@example.com">zsy07014411@gmail.com</a>
                 </li>
                 <li>
-                  GitHub：<a href="https://github.com/yourname" target="_blank">github.com/yourname</a>
+                  GitHub：<a href="https://github.com/yourname" target="_blank">github.com/zsy00701</a>
                 </li>
               </ul>
             </div>
