@@ -856,8 +856,86 @@ a {
   max-width: 100%;
   height: auto;
   border-radius: 6px;
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  display: block;
+}
+
+/* 图片标题（如果使用 <figure> 标签） */
+.post-content figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.post-content figure img {
+  margin: 0;
+}
+
+.post-content figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* 表格样式 */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.post-content table thead {
+  background: rgba(31, 63, 120, 0.08);
+}
+
+.post-content table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  font-size: 0.9375rem;
+}
+
+.post-content table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.9375rem;
+}
+
+.post-content table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.post-content table tbody tr:hover {
+  background: rgba(31, 63, 120, 0.04);
+}
+
+.post-content table tbody tr:nth-child(even) {
+  background: rgba(31, 63, 120, 0.02);
+}
+
+.post-content table tbody tr:nth-child(even):hover {
+  background: rgba(31, 63, 120, 0.06);
+}
+
+.post-content table code {
+  background: var(--bg-sidebar);
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+
+.post-content table strong {
+  font-weight: 600;
+  color: var(--ink);
 }
 
 /* 文章导航 */

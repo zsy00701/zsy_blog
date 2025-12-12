@@ -65,3 +65,4 @@ export function SearchBar({ posts }: { posts: Post[] }) {
   );
 }
 
+

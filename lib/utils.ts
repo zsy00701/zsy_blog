@@ -10,3 +10,4 @@ export function countWords(content: string): number {
   return text.length;
 }
 
+
