@@ -1,5 +1,6 @@
 import { remark } from 'remark';
 import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify';
@@ -9,6 +10,7 @@ import { addIdsToHeadings } from './toc';
 export async function markdownToHtml(markdown: string): Promise<string> {
   const result = await remark()
     .use(remarkMath)
+    .use(remarkGfm)
     .use(remarkImages)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeKatex)

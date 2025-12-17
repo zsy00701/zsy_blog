@@ -455,6 +455,52 @@ a {
   text-align: initial;
 }
 
+/* 表格样式 */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95em;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-content table thead {
+  background: var(--bg-sidebar);
+}
+
+.post-content table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+}
+
+.post-content table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.post-content table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.post-content table tbody tr:hover {
+  background: rgba(31, 63, 120, 0.04);
+}
+
+.post-content table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.post-content table tbody tr:nth-child(even):hover {
+  background: rgba(31, 63, 120, 0.06);
+}
+
 /* 返回链接 */
 .back-link {
   display: inline-flex;
