@@ -111,30 +111,12 @@ blog/
 
 ### 其他平台
 
-这个博客可以部署到多个平台，**不是只能在本地运行**！
+这个博客是静态生成的，可以部署到：
 
-支持的平台：
-- **Vercel**（推荐）- 零配置，自动部署
-- **Netlify** - 类似 Vercel，功能丰富
-- **Cloudflare Pages** - 全球 CDN，速度快
-- **自托管服务器** - 完全控制
-
-### 详细部署指南
-
-- **新手推荐**：查看 [DEPLOY_STEP_BY_STEP.md](./DEPLOY_STEP_BY_STEP.md) - 一步一步详细教程
-- **快速参考**：查看 [DEPLOY.md](./DEPLOY.md) - 各平台部署说明和高级配置
-
-### 部署后添加文章
-
-查看 [HOW_TO_ADD_POSTS.md](./HOW_TO_ADD_POSTS.md) - 详细的添加文章指南，包含各种场景和最佳实践
-
-## 数据存储
-
-这个博客使用**文件系统**存储文章（不是传统数据库）：
-- 所有文章在 `content/posts/` 目录
-- 文件即数据，简单直观
-- 支持 Git 版本控制
-- 查看 [DATA_STORAGE.md](./DATA_STORAGE.md) 了解详细说明
+- Netlify
+- GitHub Pages
+- Cloudflare Pages
+- 任何支持静态网站的平台
 
 ## 自定义
 

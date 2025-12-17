@@ -1,9 +1,9 @@
 ---
 title: 欢迎来到我的博客
-date: 2025-12-08
+date: 2025-12-08T00:00:00.000Z
 excerpt: 这是我的第一篇博客文章，介绍这个博客的用途和功能。
+category: 未分类
 ---
-
 # 欢迎来到我的博客
 
 这是我的第一篇博客文章！这个博客使用 Next.js 构建，支持 Markdown 格式的文章。该博客框架由cursor生成。
@@ -32,6 +32,3 @@ function greet(name) {
 
 console.log(greet('World'));
 ```
-
-
-

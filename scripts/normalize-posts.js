@@ -41,24 +41,18 @@ function walkMarkdownFiles(dir, baseDir = dir) {
         slugifySegment(
           relative.replace(/\.md$/, '').replace(new RegExp(`\\${path.sep}`, 'g'), '-')
         ) || slugifySegment(entry.name.replace(/\.md$/, ''));
-      results.push({
-        fullPath,
-        slug,
-        category,
-        baseName: entry.name.replace(/\.md$/, ''),
-      });
+      results.push({ fullPath, slug, category });
     }
   }
   return results;
 }
 
-function normalizeFile(filePath, fallbackCategory, slug, baseName) {
+function normalizeFile(filePath, fallbackCategory, slug) {
   const raw = fs.readFileSync(filePath, 'utf8');
-  const stat = fs.statSync(filePath);
   const parsed = matter(raw);
 
-  const title = parsed.data.title || baseName || slug;
-  const date = parsed.data.date || stat.birthtime.toISOString();
+  const title = parsed.data.title || slug;
+  const date = parsed.data.date || new Date().toISOString();
   const category = parsed.data.category || fallbackCategory || '未分类';
   const tags = ensureArray(parsed.data.tags);
   const excerpt = parsed.data.excerpt || summarize(parsed.content);
@@ -88,7 +82,7 @@ function main() {
   }
 
   const results = files.map((file) =>
-    normalizeFile(file.fullPath, file.category, file.slug, file.baseName)
+    normalizeFile(file.fullPath, file.category, file.slug)
   );
   console.log('✅ 已规范化以下文件:');
   results.forEach((r) => {

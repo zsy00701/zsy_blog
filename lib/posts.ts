@@ -14,7 +14,6 @@ export interface Post {
   tags?: string[];
   pathSegments: string[]; // 相对 content/posts 的目录分段
   relativePath: string;   // 相对路径（含文件名）
-  baseName: string;       // 原文件名（不含扩展名，用于回退标题）
 }
 
 type PostEntry = {
@@ -23,7 +22,6 @@ type PostEntry = {
   category: string;
   pathSegments: string[];
   relativePath: string;
-  baseName: string;
 };
 
 function slugifySegment(text: string): string {
@@ -61,7 +59,6 @@ function walkMarkdownFiles(dir: string, baseDir = dir): PostEntry[] {
         category,
         pathSegments: parts.slice(0, -1),
         relativePath: relative,
-        baseName: fileName.replace(/\.md$/, ''),
       });
     }
   }
@@ -72,7 +69,6 @@ function walkMarkdownFiles(dir: string, baseDir = dir): PostEntry[] {
 function parsePost(entry: PostEntry): Post | null {
   if (!fs.existsSync(entry.fullPath)) return null;
   const fileContents = fs.readFileSync(entry.fullPath, 'utf8');
-  const stat = fs.statSync(entry.fullPath);
   const { data, content } = matter(fileContents);
   const category = (data.category || entry.category || '未分类') as string;
   const tags = Array.isArray(data.tags)
@@ -83,15 +79,14 @@ function parsePost(entry: PostEntry): Post | null {
 
   return {
     slug: entry.slug,
-    title: data.title || entry.baseName || entry.slug,
-    date: data.date || stat.birthtime.toISOString(),
+    title: data.title || entry.slug,
+    date: data.date || new Date().toISOString(),
     excerpt: data.excerpt || '',
     content,
     category,
     tags,
     pathSegments: entry.pathSegments,
     relativePath: entry.relativePath,
-    baseName: entry.baseName,
   };
 }
 

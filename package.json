@@ -15,12 +15,18 @@
   "dependencies": {
     "date-fns": "^2.30.0",
     "gray-matter": "^4.0.3",
+    "katex": "^0.16.27",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "remark-images": "^4.1.0",
+    "remark-math": "^6.0.0",
+    "remark-rehype": "^11.1.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

@@ -1,3 +1,12 @@
+---
+title: '-vit'
+date: '2025-12-17T02:39:00.590Z'
+excerpt: >-
+  ## Vision Transformer的架构
+  ![image-20251217010249693](/Users/zhoushengyao/Library/Application
+  Support/typora-user-images/image-202512170102496…
+category: 多模态大模型
+---
 ## Vision Transformer的架构
 
 ![image-20251217010249693](/Users/zhoushengyao/Library/Application Support/typora-user-images/image-20251217010249693.png)
@@ -6,14 +15,15 @@
 
 1. 把图片切成Patch
 2. Patch拉平+线性映射
+3. 加入位置编码
+4. transformer encoder
+5. 分类头输出
 
-<span style="color:red">【前两点还可以用卷积来实现，每个patch的token可以用卷积计算，然后维度就是卷积核的数量】</span>
-
-1. 加入位置编码
-2. transformer encoder
-3. 分类头输出
+> 前两点还可以用卷积来实现，一个patch就是一个token，卷积核数量就是维度。
 
 ## 细节说明
+
+### [CLS] token
 
 **加入[CLS] token**:用于聚合图片的信息
 
@@ -41,6 +51,21 @@ $$
 **一定要[CLS] token吗**：
 
 不一定
+
+### Positional Embedding
+
+> 可学习的positional embedding
+
+并且在公式 (1) 里给了最关键的张量形状：
+$$
+z_0 = [x_{class}; x_p^1 E; \dots; x_p^N E] + E_{pos},\ \ \ E_{pos}\in \mathbb{R}^{(N+1)\times D}
+$$
+也就是：
+
+- 序列长度是 **N+1**（包含 `[CLS]`）
+- 每个位置一个 **D 维**可学习向量
+
+
 
 ## 如何训练
 
@@ -70,4 +95,3 @@ $$
 
 - 有时使用（ImageNet 训练）
 - JFT 预训练中常为 0
-

@@ -1,12 +1,18 @@
 import { remark } from 'remark';
-import html from 'remark-html';
-import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkRehype from 'remark-rehype';
+import rehypeKatex from 'rehype-katex';
+import rehypeStringify from 'rehype-stringify';
+import remarkImages from 'remark-images';
 import { addIdsToHeadings } from './toc';
 
 export async function markdownToHtml(markdown: string): Promise<string> {
   const result = await remark()
-    .use(remarkGfm)
-    .use(html)
+    .use(remarkMath)
+    .use(remarkImages)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeKatex)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(markdown);
   const htmlContent = result.toString();
   return addIdsToHeadings(htmlContent);

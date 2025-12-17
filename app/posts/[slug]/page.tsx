@@ -6,12 +6,13 @@ import { extractToc } from '@/lib/toc';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { SidebarTree } from '@/app/components/SidebarTree';
-import { TocScroll } from '@/app/components/TocScroll';
-import { estimateReadingTime, countWords } from '@/lib/utils';
-import { generateMetadata, generateStaticParams as genParams } from './metadata';
 
-export { generateMetadata };
-export const generateStaticParams = genParams;
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export default async function PostPage({
   params,
@@ -27,16 +28,6 @@ export default async function PostPage({
 
   const content = await markdownToHtml(post.content);
   const toc = extractToc(content);
-  const readingTime = estimateReadingTime(content);
-  const wordCount = countWords(content);
-
-  // 获取上一篇和下一篇文章
-  const sortedPosts = allPosts.sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  const currentIndex = sortedPosts.findIndex((p) => p.slug === post.slug);
-  const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 
   return (
     <div className="layout-container">
@@ -47,7 +38,20 @@ export default async function PostPage({
         </div>
         <SidebarTree posts={allPosts} activeSlug={post.slug} />
 
-        {toc.length > 0 && <TocScroll toc={toc} />}
+        {toc.length > 0 && (
+          <div className="toc">
+            <div className="toc-title">目录</div>
+            <ul className="toc-list">
+              {toc.map((item) => (
+                <li key={item.id} className={`toc-item toc-level-${item.level}`}>
+                  <a href={`#${item.id}`} className="toc-link">
+                    {item.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </aside>
 
       <main className="main-content">
@@ -76,9 +80,6 @@ export default async function PostPage({
               </div>
               <div className="post-date">
                 {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
-                <span className="post-stats">
-                  · {readingTime} 分钟阅读 · {wordCount} 字
-                </span>
               </div>
               {post.tags && post.tags.length > 0 && (
                 <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -94,24 +95,6 @@ export default async function PostPage({
               dangerouslySetInnerHTML={{ __html: content }}
             />
           </article>
-
-          {/* 上一篇/下一篇文章导航 */}
-          {(prevPost || nextPost) && (
-            <nav className="post-navigation">
-              {prevPost && (
-                <Link href={`/posts/${prevPost.slug}`} className="nav-post prev-post">
-                  <div className="nav-post-label">← 上一篇</div>
-                  <div className="nav-post-title">{prevPost.title}</div>
-                </Link>
-              )}
-              {nextPost && (
-                <Link href={`/posts/${nextPost.slug}`} className="nav-post next-post">
-                  <div className="nav-post-label">下一篇 →</div>
-                  <div className="nav-post-title">{nextPost.title}</div>
-                </Link>
-              )}
-            </nav>
-          )}
         </div>
 
         <footer className="footer">
