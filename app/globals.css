@@ -439,6 +439,22 @@ a {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* KaTeX 数学公式样式 */
+.post-content .katex {
+  font-size: 1.1em;
+}
+
+.post-content .katex-display {
+  margin: 1.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.post-content .katex-display > .katex {
+  display: inline-block;
+  text-align: initial;
+}
+
 /* 返回链接 */
 .back-link {
   display: inline-flex;
