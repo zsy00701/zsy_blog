@@ -1,3 +1,12 @@
+---
+title: '-rope'
+date: '2025-12-24T17:49:21.280Z'
+excerpt: >-
+  ## 1.Introduction > Rotary Position Embedding
+  **核心思想：**通过旋转矩阵来编码绝对位置，使得在计算注意力（Attention）时，其结果自然包含相对位置信息。 RoPE 的目标是寻找一个变换
+  $f(\mathbf{x}, m)$（…
+category: 大语言模型
+---
 ## 1.Introduction
 
 > Rotary Position Embedding
@@ -114,4 +123,3 @@ $$\langle f(\mathbf{q}, m), f(\mathbf{k}, n) \rangle = \mathbf{q}^\top \mathbf{R
 RoPE 还有一个非常优美的性质：随着相对距离 $|m-n|$ 的增加，内积的期望值会趋于衰减。这符合直觉——距离越远的词，相互关联的可能性通常越小。
 
 > 证明：待补充
-

@@ -1,5 +1,11 @@
-
-
+---
+title: '-vision-instructions-tune'
+date: '2025-12-24T17:49:21.277Z'
+excerpt: >-
+  The format of multimodal instruction-following data will then look like this:
+  Human: Xq Xv Assistant: Xc, where Xq is the question, Xv is th…
+category: 多模态大模型
+---
 The format of multimodal instruction-following data will then look like this: Human: Xq Xv Assistant: Xc, where Xq is the question, Xv is the image, and Xc is the caption of the image.
 
 **如何生成数据**：给chatgpt描述和边界

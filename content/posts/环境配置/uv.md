@@ -1,3 +1,11 @@
+---
+title: '-uv'
+date: '2025-12-24T17:49:21.281Z'
+excerpt: >-
+  ## uv的各个文件 ### pyproject.toml: uv 完全基于 `pyproject.toml` 工作，它同时承担了： -
+  项目元数据（名称、版本、作者） - Python 版本要求 - 依赖声明 - 构建系统 - uv 的专属配置 `举例`： ~~~toml [p…
+category: 环境配置
+---
 ## uv的各个文件
 
 ### pyproject.toml:

@@ -1,3 +1,11 @@
+---
+title: '-intro'
+date: '2025-12-24T17:49:21.283Z'
+excerpt: >-
+  ## Classes of Computers - Personal computers(个人 PC) 1. General purpose，variety
+  of software 2. subject to cost/performance tradeoff - Server …
+category: 计算机系统原理
+---
 ## Classes of Computers
 
 - Personal computers(个人 PC)
@@ -147,10 +155,3 @@ Total work done per unit time
   | **Compiler (编译器)**                              | 影响 **IC**，**CPI**           | 编译器优化的好坏直接决定了程序被翻译成机器代码的效率。编译器可以选择生成更少的指令 (IC)，或选择更低 CPI 的指令组合 。 |
   | **Instruction Set Architecture (ISA, 指令集架构)** | 影响 **IC**，**CPI*            | ISA 是硬件和软件之间的接口，它定义了指令的集合。ISA 影响了程序编译后生成的指令数量 (IC)，不同指令集的设计也会影响执行指令所需的平均周期数 (CPI)，同时还限制了硬件设计者能够实现的最小时钟周期时间 (*T*ccycle) 。 |
   | **Processor and Memory System (处理器和内存系统)** | 影响 **CPI** 和 ***T\*ccycle** | 处理器和内存系统的设计（例如 CPU 缓存、流水线等）决定了指令执行的速度（CPI）和时钟频率（1/*T*ccycle） 。 |
-
-  
-
-  
-
-  
-
