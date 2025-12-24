@@ -6,6 +6,10 @@ import { extractToc } from '@/lib/toc';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { SidebarTree } from '@/app/components/SidebarTree';
+import { ThemeToggle } from '@/app/components/ThemeToggle';
+import { ReadingProgress } from '@/app/components/ReadingProgress';
+import { ScrollToTop } from '@/app/components/ScrollToTop';
+import { RightToc } from '@/app/components/RightToc';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -29,79 +33,79 @@ export default async function PostPage({
   const content = await markdownToHtml(post.content);
   const toc = extractToc(content);
 
+  // 计算阅读时间（假设每分钟阅读 300 字）
+  const wordCount = post.content.length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 300));
+
   return (
-    <div className="layout-container">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-title">我的笔记</div>
-          <div className="sidebar-subtitle">学习与思考</div>
-        </div>
-        <SidebarTree posts={allPosts} activeSlug={post.slug} />
-
-        {toc.length > 0 && (
-          <div className="toc">
-            <div className="toc-title">目录</div>
-            <ul className="toc-list">
-              {toc.map((item) => (
-                <li key={item.id} className={`toc-item toc-level-${item.level}`}>
-                  <a href={`#${item.id}`} className="toc-link">
-                    {item.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
+    <>
+      <ReadingProgress />
+      
+      <div className="layout-container">
+        <aside className="sidebar">
+          <div className="sidebar-header">
+            <div className="sidebar-title">我的笔记</div>
+            <div className="sidebar-subtitle">学习与思考的记录</div>
           </div>
-        )}
-      </aside>
+          <SidebarTree posts={allPosts} activeSlug={post.slug} />
+        </aside>
 
-      <main className="main-content">
-        <header className="header">
-          <div className="header-content">
-            <Link href="/" className="logo">
-              我的博客
-            </Link>
-            <nav className="nav">
-              <Link href="/">首页</Link>
-              <Link href="/about">关于</Link>
-            </nav>
-          </div>
-        </header>
+        <main className="main-content main-content-with-toc">
+          <header className="header">
+            <div className="header-content">
+              <Link href="/" className="logo">
+                📚 我的博客
+              </Link>
+              <nav className="nav">
+                <Link href="/">首页</Link>
+                <Link href="/about">关于</Link>
+                <ThemeToggle />
+              </nav>
+            </div>
+          </header>
 
-        <div className="content-wrapper">
-          <Link href="/" className="back-link">
-            ← 返回首页
-          </Link>
+          <div className="article-layout">
+            <div className="content-wrapper">
+              <Link href="/" className="back-link">
+                ← 返回首页
+              </Link>
 
-          <article>
-            <div className="post-header">
-              <h1 className="post-title">{post.title}</h1>
-              <div className="post-meta">
-                <span className="category-badge">{post.category || '未分类'}</span>
-              </div>
-              <div className="post-date">
-                {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
-              </div>
-              {post.tags && post.tags.length > 0 && (
-                <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {post.tags.map((tag) => (
-                    <span key={tag} className="tag-badge">#{tag}</span>
-                  ))}
+              <article>
+                <div className="post-header">
+                  <h1 className="post-title">{post.title}</h1>
+                  <div className="post-meta">
+                    <span className="category-badge">{post.category || '未分类'}</span>
+                    <span>约 {readingTime} 分钟阅读</span>
+                  </div>
+                  <div className="post-date">
+                    {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
+                  </div>
+                  {post.tags && post.tags.length > 0 && (
+                    <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {post.tags.map((tag) => (
+                        <span key={tag} className="tag-badge">#{tag}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
+
+                <div
+                  className="post-content"
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              </article>
             </div>
 
-            <div
-              className="post-content"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
-          </article>
-        </div>
+            {toc.length > 0 && <RightToc toc={toc} />}
+          </div>
 
-        <footer className="footer">
-          <p>&copy; {new Date().getFullYear()} 我的个人博客</p>
-        </footer>
-      </main>
-    </div>
+          <footer className="footer">
+            <p>© {new Date().getFullYear()} 我的个人博客 · 用 ❤️ 和 Next.js 构建</p>
+          </footer>
+        </main>
+
+        <ScrollToTop />
+      </div>
+    </>
   );
 }
-
