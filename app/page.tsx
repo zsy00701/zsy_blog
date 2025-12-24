@@ -1,49 +1,51 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/posts';
-import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
-import { SidebarTree } from '@/app/components/SidebarTree';
+import { Sidebar } from '@/app/components/Sidebar';
 import { ThemeToggle } from '@/app/components/ThemeToggle';
 import { ScrollToTop } from '@/app/components/ScrollToTop';
+import { SearchBox } from '@/app/components/SearchBox';
+import { CategoryFilter } from '@/app/components/CategoryFilter';
 
 export default function Home() {
   const posts = getAllPosts();
   
   // 计算分类数量
   const categories = new Set(posts.map(p => p.category || '未分类'));
+  
+  // 计算总标签数
+  const allTags = new Set(posts.flatMap(p => p.tags || []));
 
   return (
     <div className="layout-container">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-title">我的笔记</div>
-          <div className="sidebar-subtitle">学习与思考的记录</div>
-        </div>
-        <SidebarTree posts={posts} />
-      </aside>
+      <Sidebar posts={posts} />
 
       <main className="main-content">
         <header className="header">
           <div className="header-content">
             <Link href="/" className="logo">
-              📚 我的博客
+              <span className="logo-icon">📚</span>
+              <span className="logo-text">我的博客</span>
             </Link>
-            <nav className="nav">
-              <Link href="/">首页</Link>
-              <Link href="/about">关于</Link>
+            <div className="header-right">
+              <SearchBox posts={posts} />
+              <nav className="nav">
+                <Link href="/">首页</Link>
+                <Link href="/about">关于</Link>
+              </nav>
               <ThemeToggle />
-            </nav>
+            </div>
           </div>
         </header>
 
         <div className="content-wrapper">
           {/* Hero 区域 */}
           <section className="hero-section">
+            <div className="hero-badge">✨ 持续更新中</div>
             <h1 className="hero-title">
               记录<span>学习</span>的旅程
             </h1>
             <p className="hero-subtitle">
-              在这里分享我的技术笔记、学习心得和思考，涵盖机器学习、大模型、计算机系统等领域。
+              在这里分享我的技术笔记、学习心得和思考
             </p>
             <div className="hero-stats">
               <div className="stat-item">
@@ -54,54 +56,36 @@ export default function Home() {
                 <div className="stat-number">{categories.size}</div>
                 <div className="stat-label">个分类</div>
               </div>
+              <div className="stat-item">
+                <div className="stat-number">{allTags.size}</div>
+                <div className="stat-label">个标签</div>
+              </div>
             </div>
           </section>
 
-          {/* 文章列表 */}
-          <h2 style={{ 
-            fontFamily: "'Crimson Pro', serif",
-            fontSize: '1.5rem', 
-            fontWeight: 600, 
-            marginBottom: '1.5rem',
-            color: 'var(--text)'
-          }}>
-            最新文章
-          </h2>
+          {/* 分类过滤和文章列表 */}
+          <section className="posts-section">
+            <div className="section-header">
+              <h2 className="section-title">📝 所有文章</h2>
+            </div>
 
-          {posts.length === 0 ? (
-            <div className="empty-state">
-              <p style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>📝 还没有文章</p>
-              <p>在 content/posts 目录下添加 Markdown 文件开始写作</p>
-            </div>
-          ) : (
-            <div className="post-list">
-              {posts.map((post) => (
-                <article key={post.slug} className="post-item">
-                  <h2>
-                    <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-                  </h2>
-                  <div className="post-meta">
-                    <span className="category-badge">{post.category || '未分类'}</span>
-                    <span>{format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}</span>
-                  </div>
-                  {post.excerpt && (
-                    <p className="post-excerpt">{post.excerpt}</p>
-                  )}
-                  {post.tags && post.tags.length > 0 && (
-                    <div style={{ marginTop: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="tag-badge">#{tag}</span>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
-          )}
+            {posts.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-icon">📝</div>
+                <p className="empty-title">还没有文章</p>
+                <p className="empty-desc">在 content/posts 目录下添加 Markdown 文件开始写作</p>
+              </div>
+            ) : (
+              <CategoryFilter posts={posts} />
+            )}
+          </section>
         </div>
 
         <footer className="footer">
-          <p>© {new Date().getFullYear()} 我的个人博客 · 用 ❤️ 和 Next.js 构建</p>
+          <div className="footer-content">
+            <p>© {new Date().getFullYear()} 我的个人博客</p>
+            <p className="footer-sub">用 ❤️ 和 Next.js 构建</p>
+          </div>
         </footer>
       </main>
 

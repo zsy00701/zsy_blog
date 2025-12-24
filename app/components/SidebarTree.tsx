@@ -10,15 +10,22 @@ export type TreeNode = {
   children: TreeNode[];
 };
 
-function ExpandIcon({ expanded }: { expanded: boolean }) {
-  return (
-    <span
-      className={`folder-toggle ${expanded ? "expanded" : ""}`}
-      aria-hidden
-    >
-      ▸
-    </span>
-  );
+// 分类图标映射
+const categoryIcons: Record<string, string> = {
+  "多模态大模型": "🤖",
+  "大语言模型": "💬",
+  "machine_learning": "🧠",
+  "计算机系统原理": "💻",
+  "LLMAPP": "🚀",
+  "科研第一步": "🔬",
+  "roadmap": "🗺️",
+  "Network": "🌐",
+  "环境配置": "⚙️",
+  "未分类": "📄",
+};
+
+function getCategoryIcon(name: string): string {
+  return categoryIcons[name] || "📁";
 }
 
 function TreeBranch({
@@ -30,15 +37,27 @@ function TreeBranch({
   depth?: number;
   activeSlug?: string;
 }) {
-  const [expanded, setExpanded] = useState(true);
+  // 检查是否有活跃的子项
+  const hasActiveChild = useMemo(() => {
+    const checkActive = (n: TreeNode): boolean => {
+      if (n.posts.some((p) => p.slug === activeSlug)) return true;
+      return n.children.some(checkActive);
+    };
+    return checkActive(node);
+  }, [node, activeSlug]);
 
+  const [expanded, setExpanded] = useState(hasActiveChild || depth === 0);
   const hasChildren = node.children.length > 0 || node.posts.length > 0;
-  const paddingLeft = depth * 12;
+  const totalCount = node.posts.length + node.children.reduce((sum, c) => {
+    const countAll = (n: TreeNode): number => 
+      n.posts.length + n.children.reduce((s, ch) => s + countAll(ch), 0);
+    return sum + countAll(c);
+  }, 0);
 
   return (
-    <div className="tree-node" style={{ paddingLeft }}>
+    <div className="tree-node">
       <div
-        className="nav-section-title tree-branch-header"
+        className={`tree-branch-header ${hasActiveChild ? "has-active" : ""}`}
         onClick={(e) => {
           e.stopPropagation();
           if (hasChildren) {
@@ -50,44 +69,38 @@ function TreeBranch({
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            e.stopPropagation();
-            if (hasChildren) {
-              setExpanded((v) => !v);
-            }
+            if (hasChildren) setExpanded((v) => !v);
           }
         }}
       >
-        {hasChildren && <ExpandIcon expanded={expanded} />}
-        <span className="folder-icon">📁</span>
-        <span className="folder-name">{node.name}</span>
-        <span className="count-badge">
-          {node.posts.length +
-            node.children.reduce((sum, c) => sum + c.posts.length, 0)}
+        <span className={`folder-toggle ${expanded ? "expanded" : ""}`}>
+          {hasChildren ? "▸" : ""}
         </span>
+        <span className="folder-icon">{getCategoryIcon(node.name)}</span>
+        <span className="folder-name">{node.name}</span>
+        <span className="count-badge">{totalCount}</span>
       </div>
 
-      {expanded && (
-        <div className="tree-children">
-          {node.posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/posts/${post.slug}`}
-              className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
-              style={{ paddingLeft: paddingLeft + 12 }}
-            >
-              {post.title}
-            </Link>
-          ))}
-          {node.children.map((child) => (
-            <TreeBranch
-              key={`${node.name}-${child.name}-${depth}`}
-              node={child}
-              depth={depth + 1}
-              activeSlug={activeSlug}
-            />
-          ))}
-        </div>
-      )}
+      <div className={`tree-children ${expanded ? "expanded" : ""}`}>
+        {node.posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/posts/${post.slug}`}
+            className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
+          >
+            <span className="nav-item-icon">📝</span>
+            <span className="nav-item-title">{post.title}</span>
+          </Link>
+        ))}
+        {node.children.map((child) => (
+          <TreeBranch
+            key={`${node.name}-${child.name}-${depth}`}
+            node={child}
+            depth={depth + 1}
+            activeSlug={activeSlug}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -96,7 +109,7 @@ function sortTree(node: TreeNode): TreeNode {
   return {
     ...node,
     posts: [...node.posts].sort((a, b) =>
-      a.title.localeCompare(b.title, "zh")
+      new Date(b.date).getTime() - new Date(a.date).getTime()
     ),
     children: [...node.children]
       .map(sortTree)
@@ -139,6 +152,10 @@ export function SidebarTree({
 
   return (
     <nav className="sidebar-nav">
+      <div className="sidebar-nav-header">
+        <span className="sidebar-nav-title">文档目录</span>
+        <span className="sidebar-nav-count">{posts.length} 篇</span>
+      </div>
       <div className="nav-section">
         {tree.children.map((child) => (
           <TreeBranch
@@ -152,4 +169,3 @@ export function SidebarTree({
     </nav>
   );
 }
-

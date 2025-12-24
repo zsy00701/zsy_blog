@@ -5,11 +5,13 @@ import { markdownToHtml } from '@/lib/markdown';
 import { extractToc } from '@/lib/toc';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
-import { SidebarTree } from '@/app/components/SidebarTree';
+import { Sidebar } from '@/app/components/Sidebar';
 import { ThemeToggle } from '@/app/components/ThemeToggle';
 import { ReadingProgress } from '@/app/components/ReadingProgress';
 import { ScrollToTop } from '@/app/components/ScrollToTop';
 import { RightToc } from '@/app/components/RightToc';
+import { RelatedPosts } from '@/app/components/RelatedPosts';
+import { SearchBox } from '@/app/components/SearchBox';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -42,46 +44,47 @@ export default async function PostPage({
       <ReadingProgress />
       
       <div className="layout-container">
-        <aside className="sidebar">
-          <div className="sidebar-header">
-            <div className="sidebar-title">我的笔记</div>
-            <div className="sidebar-subtitle">学习与思考的记录</div>
-          </div>
-          <SidebarTree posts={allPosts} activeSlug={post.slug} />
-        </aside>
+        <Sidebar posts={allPosts} activeSlug={post.slug} />
 
         <main className="main-content main-content-with-toc">
           <header className="header">
             <div className="header-content">
               <Link href="/" className="logo">
-                📚 我的博客
+                <span className="logo-icon">📚</span>
+                <span className="logo-text">我的博客</span>
               </Link>
-              <nav className="nav">
-                <Link href="/">首页</Link>
-                <Link href="/about">关于</Link>
+              <div className="header-right">
+                <SearchBox posts={allPosts} />
+                <nav className="nav">
+                  <Link href="/">首页</Link>
+                  <Link href="/about">关于</Link>
+                </nav>
                 <ThemeToggle />
-              </nav>
+              </div>
             </div>
           </header>
 
           <div className="article-layout">
             <div className="content-wrapper">
               <Link href="/" className="back-link">
-                ← 返回首页
+                <span>←</span> 返回首页
               </Link>
 
-              <article>
+              <article className="article">
                 <div className="post-header">
-                  <h1 className="post-title">{post.title}</h1>
-                  <div className="post-meta">
-                    <span className="category-badge">{post.category || '未分类'}</span>
-                    <span>约 {readingTime} 分钟阅读</span>
+                  <div className="post-header-meta">
+                    <span className="post-category-badge">{post.category || '未分类'}</span>
+                    <span className="post-reading-time">📖 {readingTime} 分钟阅读</span>
                   </div>
-                  <div className="post-date">
-                    {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
+                  <h1 className="post-title">{post.title}</h1>
+                  <div className="post-info">
+                    <span className="post-date">
+                      🗓️ {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
+                    </span>
+                    <span className="post-words">📝 约 {wordCount} 字</span>
                   </div>
                   {post.tags && post.tags.length > 0 && (
-                    <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <div className="post-tags">
                       {post.tags.map((tag) => (
                         <span key={tag} className="tag-badge">#{tag}</span>
                       ))}
@@ -93,6 +96,9 @@ export default async function PostPage({
                   className="post-content"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
+
+                {/* 相关文章 */}
+                <RelatedPosts currentPost={post} allPosts={allPosts} />
               </article>
             </div>
 
@@ -100,7 +106,10 @@ export default async function PostPage({
           </div>
 
           <footer className="footer">
-            <p>© {new Date().getFullYear()} 我的个人博客 · 用 ❤️ 和 Next.js 构建</p>
+            <div className="footer-content">
+              <p>© {new Date().getFullYear()} 我的个人博客</p>
+              <p className="footer-sub">用 ❤️ 和 Next.js 构建</p>
+            </div>
           </footer>
         </main>
 
