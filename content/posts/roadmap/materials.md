@@ -16,6 +16,8 @@ category: roadmap
 2. [书生大模型实战训练营](https://aicarrier.feishu.cn/wiki/VC12w2b7IiyZXlkfuxzch8K6n8f)
 3. [RL/SFT 比赛](https://aicarrier.feishu.cn/wiki/MlbXw4rgQiitCrkZRmZcMyxKnmg)
 4. [cs336](https://stanford-cs336.github.io/spring2025/)
+5. [cs25](https://web.stanford.edu/class/cs25/)
+6. [cs324](https://stanford-cs324.github.io/winter2022/calendar/)
 
 ## MLLM/VLM
 

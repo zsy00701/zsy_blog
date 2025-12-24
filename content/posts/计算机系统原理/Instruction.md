@@ -100,5 +100,50 @@
 **Arithmetic instructions use register
 operands**：：**寄存器比内存快得多**，CPU可以在一个或几个时钟周期内访问寄存器。
 
+## Memory Operands
 
+- load
+- store
+
+- Each address identifies an 8-bit byte
+
+- RISC-V is Little Endian
+- RISC-V does not require words to be aligned in memory
+
+> 对齐：某种大小的数据，最好（或必须）放在“地址是它大小整数倍”的位置上。
+
+- Values must be fetched from memory before instructions can operate on them
+
+`How is memory-address determined?`:
+
+- The compiler organizes data in memory
+
+## Endian-ness（字节序）
+
+`Little Endian`:
+
+- Least-significant byte at least address of a word
+- Big Endian: Most-significant byte at least 
+  address
+
+![image-20251224140741707](/Users/zhoushengyao/Library/Application Support/typora-user-images/image-20251224140741707.png)
+
+> 在 RISC-V 架构中：
+>
+> Word = 32bit =4字节 
+>
+> Double word=64bit=8字节 
+
+## Register vs Memory
+
+- Register is faster to access than memory
+- Operating on memory data requires loads and stores (so on)
+- Compiler must use registers for variables as  much as possible
+  - Only spill to memory for less frequently used variables
+  - Register optimazation is important
+
+## Immediate Operands
+
+- No subtract immediate instruction
+  - just use a negtive constant
 
