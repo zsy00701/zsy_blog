@@ -1018,6 +1018,54 @@ a {
   font-size: 1em;
 }
 
+/* 改进的 KaTeX 样式 */
+.post-content .katex-html {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 矩阵和大公式的样式 */
+.post-content .katex .mord.mtight,
+.post-content .katex .minner {
+  font-size: 0.95em;
+}
+
+/* 确保公式在容器内正确显示 */
+.post-content .katex-display {
+  display: block;
+  text-align: center;
+  padding: 0.75rem 0;
+}
+
+.post-content .katex-display .katex {
+  display: inline-block;
+  text-align: left;
+}
+
+/* 解决长公式溢出问题 */
+.post-content .katex-display > .katex {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+/* 行内公式样式 */
+.post-content p .katex {
+  font-size: 1em;
+}
+
+/* 矩阵环境样式优化 */
+.post-content .katex .mord.text {
+  font-family: inherit;
+}
+
+/* 公式编号 */
+.post-content .katex-display .tag {
+  position: absolute;
+  right: 0;
+}
+
 /* 表格 */
 .post-content table {
   width: 100%;
