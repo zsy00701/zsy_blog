@@ -20,6 +20,19 @@ export async function generateStaticParams() {
   }));
 }
 
+// 分类图标映射
+const categoryIcons: Record<string, string> = {
+  "多模态大模型": "🎨",
+  "大语言模型": "🤖",
+  "machine_learning": "🧠",
+  "计算机系统原理": "💻",
+  "LLMAPP": "🔧",
+  "科研第一步": "🔬",
+  "roadmap": "🗺️",
+  "Network": "🌐",
+  "环境配置": "⚙️",
+};
+
 export default async function PostPage({
   params,
 }: {
@@ -39,6 +52,8 @@ export default async function PostPage({
   const wordCount = post.content.length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 300));
 
+  const categoryIcon = categoryIcons[post.category || ''] || '📄';
+
   return (
     <>
       <ReadingProgress />
@@ -50,8 +65,8 @@ export default async function PostPage({
           <header className="header">
             <div className="header-content">
               <Link href="/" className="logo">
-                <span className="logo-icon">📚</span>
-                <span className="logo-text">我的博客</span>
+                <span className="logo-icon">✨</span>
+                <span className="logo-text">My Blog</span>
               </Link>
               <div className="header-right">
                 <SearchBox posts={allPosts} />
@@ -73,15 +88,17 @@ export default async function PostPage({
               <article className="article">
                 <div className="post-header">
                   <div className="post-header-meta">
-                    <span className="post-category-badge">{post.category || '未分类'}</span>
-                    <span className="post-reading-time">📖 {readingTime} 分钟阅读</span>
+                    <span className="post-category-badge">
+                      {categoryIcon} {post.category || '未分类'}
+                    </span>
+                    <span className="post-reading-time">⏱️ {readingTime} 分钟阅读</span>
                   </div>
                   <h1 className="post-title">{post.title}</h1>
                   <div className="post-info">
                     <span className="post-date">
-                      🗓️ {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
+                      📅 {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
                     </span>
-                    <span className="post-words">📝 约 {wordCount} 字</span>
+                    <span className="post-words">📝 约 {wordCount.toLocaleString()} 字</span>
                   </div>
                   {post.tags && post.tags.length > 0 && (
                     <div className="post-tags">
@@ -107,8 +124,8 @@ export default async function PostPage({
 
           <footer className="footer">
             <div className="footer-content">
-              <p>© {new Date().getFullYear()} 我的个人博客</p>
-              <p className="footer-sub">用 ❤️ 和 Next.js 构建</p>
+              <p>© {new Date().getFullYear()} My Blog</p>
+              <p className="footer-sub">用 💜 和 Next.js 构建</p>
             </div>
           </footer>
         </main>

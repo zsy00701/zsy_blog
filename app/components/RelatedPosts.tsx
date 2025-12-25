@@ -70,3 +70,4 @@ export function RelatedPosts({ currentPost, allPosts, maxCount = 3 }: RelatedPos
   );
 }
 
+

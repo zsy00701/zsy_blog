@@ -47,7 +47,7 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
       {/* 移动端菜单按钮 */}
       {isMobile && (
         <button
-          className="mobile-menu-btn"
+          className="mobile-menu-button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "关闭菜单" : "打开菜单"}
           aria-expanded={isOpen}
@@ -59,7 +59,7 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
       {/* 遮罩层 */}
       {isMobile && (
         <div
-          className={`sidebar-overlay ${isOpen ? "open" : ""}`}
+          className={`mobile-overlay ${isOpen ? "show" : ""}`}
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
@@ -68,8 +68,8 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
       {/* 侧边栏 */}
       <aside className={`sidebar ${isOpen ? "open" : ""}`} onClick={handleLinkClick}>
         <div className="sidebar-header">
-          <div className="sidebar-title">我的笔记</div>
-          <div className="sidebar-subtitle">学习与思考的记录</div>
+          <div className="sidebar-title">📚 我的笔记</div>
+          <div className="sidebar-subtitle">探索 · 学习 · 成长</div>
         </div>
         <SidebarTree posts={posts} activeSlug={activeSlug} />
         {children}
@@ -77,4 +77,3 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
     </>
   );
 }
-

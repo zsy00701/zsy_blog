@@ -154,3 +154,41 @@ operands**：：**寄存器比内存快得多**，CPU可以在一个或几个时
 
 - No subtract immediate instruction
   - just use a negtive constant
+
+## The constant zero
+
+- Register x0 is the constant 0
+  - cannot be overwritten
+- useful for common operations
+  - move bettween registers
+    - add x22,x23,x0
+
+## Sign Extension
+
+- Representing a number using more bits
+  - preserve the numeric value(保证大小不变)
+- Peplicate the sign bit to the left
+- **In RISC-V instruction set**
+  - Lb:sign-extend loaded byte
+  - Lbu:zero-extend loaded byte
+  - Addi:sign-extend immediate value
+    - 立即数只有 12 位，符号拓展
+  - Beq,bne
+
+## Representing Instructions
+
+- Instructions are encoded in binary
+
+  - called machine code
+
+- RISC-V instructions
+
+  - Encoded as 32-bit instruction words 
+
+  - Small number of formats encoding operation code(opcode),register numbers,---
+
+    > 只采用少数几种指令格式，用来表示操作类型（opcode）、寄存器号等字段。
+
+  - Regularity
+
+## RISC-V R-format Instructions
