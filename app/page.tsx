@@ -23,8 +23,7 @@ export default function Home() {
         <header className="header">
           <div className="header-content">
             <Link href="/" className="logo">
-              <span className="logo-icon">✨</span>
-              <span className="logo-text">My Blog</span>
+              <span className="logo-text">Blog</span>
             </Link>
             <div className="header-right">
               <SearchBox posts={posts} />
@@ -40,12 +39,12 @@ export default function Home() {
         <div className="content-wrapper">
           {/* Hero 区域 */}
           <section className="hero-section">
-            <div className="hero-badge">🚀 探索 · 学习 · 分享</div>
+            <div className="hero-badge">持续更新中</div>
             <h1 className="hero-title">
-              记录<span>思考</span>的旅程
+              我的<span>学习笔记</span>
             </h1>
             <p className="hero-subtitle">
-              在这里记录学习笔记、技术探索与成长思考，与你一同进步
+              记录学习过程中的思考与收获
             </p>
             <div className="hero-stats">
               <div className="stat-item">
@@ -66,7 +65,7 @@ export default function Home() {
           {/* 分类过滤和文章列表 */}
           <section className="posts-section">
             <div className="section-header">
-              <h2 className="section-title">📚 最新文章</h2>
+              <h2 className="section-title">所有文章</h2>
             </div>
 
             {posts.length === 0 ? (
@@ -83,8 +82,8 @@ export default function Home() {
 
         <footer className="footer">
           <div className="footer-content">
-            <p>© {new Date().getFullYear()} My Blog</p>
-            <p className="footer-sub">用 💜 和 Next.js 构建</p>
+            <p>© {new Date().getFullYear()} Blog</p>
+            <p className="footer-sub">Powered by Next.js</p>
           </div>
         </footer>
       </main>

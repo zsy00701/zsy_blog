@@ -35,7 +35,6 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
     };
   }, [isOpen]);
 
-  // 点击链接后关闭菜单
   const handleLinkClick = () => {
     if (isMobile) {
       setIsOpen(false);
@@ -44,7 +43,6 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
 
   return (
     <>
-      {/* 移动端菜单按钮 */}
       {isMobile && (
         <button
           className="mobile-menu-button"
@@ -56,7 +54,6 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         </button>
       )}
 
-      {/* 遮罩层 */}
       {isMobile && (
         <div
           className={`mobile-overlay ${isOpen ? "show" : ""}`}
@@ -65,11 +62,10 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         />
       )}
 
-      {/* 侧边栏 */}
       <aside className={`sidebar ${isOpen ? "open" : ""}`} onClick={handleLinkClick}>
         <div className="sidebar-header">
-          <div className="sidebar-title">📚 我的笔记</div>
-          <div className="sidebar-subtitle">探索 · 学习 · 成长</div>
+          <div className="sidebar-title">笔记目录</div>
+          <div className="sidebar-subtitle">学习与思考</div>
         </div>
         <SidebarTree posts={posts} activeSlug={activeSlug} />
         {children}
