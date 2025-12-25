@@ -53,21 +53,19 @@ export function RelatedPosts({ currentPost, allPosts, maxCount = 3 }: RelatedPos
 
   return (
     <div className="related-posts">
-      <h3 className="related-posts-title">📚 相关文章</h3>
-      <div className="related-posts-list">
+      <h3 className="related-posts-title">相关文章</h3>
+      <div className="related-posts-grid">
         {relatedPosts.map((post) => (
           <Link
             key={post.slug}
             href={`/posts/${post.slug}`}
             className="related-post-item"
           >
-            <span className="related-post-category">{post.category}</span>
-            <span className="related-post-title">{post.title}</span>
+            <div className="related-post-title">{post.title}</div>
+            <div className="related-post-category">{post.category || '未分类'}</div>
           </Link>
         ))}
       </div>
     </div>
   );
 }
-
-
