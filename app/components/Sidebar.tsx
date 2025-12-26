@@ -16,7 +16,7 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
+      setIsMobile(window.innerWidth <= 900);
     };
     
     checkMobile();
@@ -47,10 +47,9 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         <button
           className="mobile-menu-button"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "关闭菜单" : "打开菜单"}
-          aria-expanded={isOpen}
+          aria-label={isOpen ? "关闭" : "目录"}
         >
-          {isOpen ? "✕" : "☰"}
+          {isOpen ? "×" : "目"}
         </button>
       )}
 
@@ -58,14 +57,13 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         <div
           className={`mobile-overlay ${isOpen ? "show" : ""}`}
           onClick={() => setIsOpen(false)}
-          aria-hidden="true"
         />
       )}
 
       <aside className={`sidebar ${isOpen ? "open" : ""}`} onClick={handleLinkClick}>
         <div className="sidebar-header">
-          <div className="sidebar-title">笔记目录</div>
-          <div className="sidebar-subtitle">学习与思考</div>
+          <div className="sidebar-title">目录</div>
+          <div className="sidebar-subtitle">CONTENTS</div>
         </div>
         <SidebarTree posts={posts} activeSlug={activeSlug} />
         {children}

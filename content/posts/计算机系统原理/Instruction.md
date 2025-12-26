@@ -192,3 +192,44 @@ operands**：：**寄存器比内存快得多**，CPU可以在一个或几个时
   - Regularity
 
 ## RISC-V R-format Instructions
+
+
+
+## 立即数的拓展
+
+在与立即数进行逻辑操作时，立即数的高位
+补0后形成64位常数进行计算
+◼ andi x9, x9, 15
+◼ 而与立即数做加法运算时，将立即数进行符
+号扩展
+
+## Basic Blocks
+
+A basic block is a sequence of instructions 
+with
+◼ No embedded branches (except at end)
+
+◼ No branch targets (except at beginning)
+
+
+
+◼ A compiler identifies basic 
+blocks for optimization
+◼ An advanced processor 
+can accelerate execution of basic blocks
+
+## Signed VS Unsigned
+
+- Signed comparison:blt, bge
+- Unsigned comparison:blu, bgeu
+
+## 边界检查的简便方法
+
+- 将有符号数作为无符号数来处理，是检验0≤x<y的一种低开销方法，常用于检查数组的下标是否越界
+- 使用无符号比较 x<y，在检查x是否小于y同时，也检查了x是不是一个负数
+
+> 原理：
+>
+> 如果x 是负数，用无符号数比较的话会非常大
+>
+> x 是正数的话，那就会正常比较

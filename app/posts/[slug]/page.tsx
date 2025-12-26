@@ -35,7 +35,6 @@ export default async function PostPage({
   const content = await markdownToHtml(post.content);
   const toc = extractToc(content);
 
-  // 计算阅读时间（假设每分钟阅读 300 字）
   const wordCount = post.content.length;
   const readingTime = Math.max(1, Math.ceil(wordCount / 300));
 
@@ -50,7 +49,7 @@ export default async function PostPage({
           <header className="header">
             <div className="header-content">
               <Link href="/" className="logo">
-                <span className="logo-text">Blog</span>
+                墨 · 笔记
               </Link>
               <div className="header-right">
                 <SearchBox posts={allPosts} />
@@ -66,21 +65,21 @@ export default async function PostPage({
           <div className="article-layout">
             <div className="content-wrapper">
               <Link href="/" className="back-link">
-                ← 返回首页
+                ← 返回
               </Link>
 
               <article className="article">
                 <div className="post-header">
                   <div className="post-header-meta">
                     <span className="post-category-badge">{post.category || '未分类'}</span>
-                    <span className="post-reading-time">{readingTime} 分钟阅读</span>
+                    <span className="post-reading-time">约 {readingTime} 分钟</span>
                   </div>
                   <h1 className="post-title">{post.title}</h1>
                   <div className="post-info">
                     <span className="post-date">
                       {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
                     </span>
-                    <span className="post-words">约 {wordCount.toLocaleString()} 字</span>
+                    <span className="post-words">{wordCount.toLocaleString()} 字</span>
                   </div>
                   {post.tags && post.tags.length > 0 && (
                     <div className="post-tags">
@@ -96,7 +95,6 @@ export default async function PostPage({
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
 
-                {/* 相关文章 */}
                 <RelatedPosts currentPost={post} allPosts={allPosts} />
               </article>
             </div>
@@ -106,8 +104,8 @@ export default async function PostPage({
 
           <footer className="footer">
             <div className="footer-content">
-              <p>© {new Date().getFullYear()} Blog</p>
-              <p className="footer-sub">Powered by Next.js</p>
+              <p>© {new Date().getFullYear()}</p>
+              <p className="footer-sub">Next.js</p>
             </div>
           </footer>
         </main>
