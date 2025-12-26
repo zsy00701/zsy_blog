@@ -32,9 +32,15 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         <button
           className="mobile-menu-button"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "关闭" : "目录"}
+          aria-label={isOpen ? "收剑" : "拔剑"}
+          style={{
+            background: 'var(--ink)',
+            color: 'var(--sword-cyan)',
+            border: '1px solid var(--sword-cyan)',
+            boxShadow: '0 0 10px var(--sword-pale)'
+          }}
         >
-          {isOpen ? "×" : "目"}
+          {isOpen ? "×" : "剑"}
         </button>
       )}
 
@@ -50,8 +56,8 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         onClick={() => isMobile && setIsOpen(false)}
       >
         <div className="sidebar-header">
-          <div className="sidebar-title">卷轴</div>
-          <div className="sidebar-subtitle">SCROLLS</div>
+          <div className="sidebar-title">藏经阁</div>
+          <div className="sidebar-subtitle">SWORD SCROLLS</div>
         </div>
         <SidebarTree posts={posts} activeSlug={activeSlug} />
         {children}

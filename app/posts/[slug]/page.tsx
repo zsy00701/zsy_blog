@@ -35,17 +35,23 @@ export default async function PostPage({ params }: { params: { slug: string } })
       <ReadingProgress />
       
       <div className="layout-container">
+        <div className="leaf-bg">
+          <div className="leaf"></div>
+          <div className="leaf"></div>
+          <div className="leaf"></div>
+        </div>
+
         <Sidebar posts={allPosts} activeSlug={post.slug} />
 
         <main className="main-content main-content-with-toc">
           <header className="header">
             <div className="header-content">
-              <Link href="/" className="logo">墨剑阁</Link>
+              <Link href="/" className="logo">诗剑行</Link>
               <div className="header-right">
                 <SearchBox posts={allPosts} />
                 <nav className="nav">
-                  <Link href="/">首页</Link>
-                  <Link href="/about">关于</Link>
+                  <Link href="/">剑谱</Link>
+                  <Link href="/about">侠客</Link>
                 </nav>
                 <ThemeToggle />
               </div>
@@ -54,13 +60,13 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
           <div className="article-layout">
             <div className="content-wrapper">
-              <Link href="/" className="back-link">← 返回</Link>
+              <Link href="/" className="back-link">← 归隐</Link>
 
               <article>
                 <div className="post-header">
                   <div className="post-header-meta">
-                    <span className="post-category-badge">{post.category || '未分类'}</span>
-                    <span className="post-reading-time">约 {readingTime} 分钟</span>
+                    <span className="post-category-badge">{post.category || '无名流派'}</span>
+                    <span className="post-reading-time">参悟需 {readingTime} 分钟</span>
                   </div>
                   <h1 className="post-title">{post.title}</h1>
                   <div className="post-info">
@@ -87,7 +93,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
           <footer className="footer">
             <div className="footer-content">
-              <p>墨剑阁 © {new Date().getFullYear()}</p>
+              <p>诗剑行 © {new Date().getFullYear()}</p>
               <p className="footer-sub">Next.js</p>
             </div>
           </footer>

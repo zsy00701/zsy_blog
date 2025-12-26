@@ -14,19 +14,26 @@ export default function Home() {
 
   return (
     <div className="layout-container">
+      <div className="leaf-bg">
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+        <div className="leaf"></div>
+      </div>
+      
       <Sidebar posts={posts} />
 
       <main className="main-content">
         <header className="header">
           <div className="header-content">
             <Link href="/" className="logo">
-              墨剑阁
+              诗剑行
             </Link>
             <div className="header-right">
               <SearchBox posts={posts} />
               <nav className="nav">
-                <Link href="/">首页</Link>
-                <Link href="/about">关于</Link>
+                <Link href="/">剑谱</Link>
+                <Link href="/about">侠客</Link>
               </nav>
               <ThemeToggle />
             </div>
@@ -35,42 +42,40 @@ export default function Home() {
 
         <div className="content-wrapper">
           <section className="hero-section">
-            <div className="hero-badge">十年磨一剑</div>
+            <div className="hero-badge">青莲剑歌</div>
             <h1 className="hero-title">
-              笔落惊风雨<br/>
-              <span>诗成泣鬼神</span>
+              大河之剑<span>天上来</span>
             </h1>
             <p className="hero-subtitle">
-              以代码为剑，以笔墨铸魂<br/>
-              记录技术修行之路
+              一篇诗，一斗酒，一曲长歌，一剑天涯<br/>
+              今朝有酒今朝醉，明日愁来明日愁
             </p>
-            <div className="hero-divider"></div>
             <div className="hero-stats">
               <div className="stat-item">
                 <div className="stat-number">{posts.length}</div>
-                <div className="stat-label">篇章</div>
+                <div className="stat-label">剑式</div>
               </div>
               <div className="stat-item">
                 <div className="stat-number">{categories.size}</div>
-                <div className="stat-label">卷轴</div>
+                <div className="stat-label">流派</div>
               </div>
               <div className="stat-item">
                 <div className="stat-number">{allTags.size}</div>
-                <div className="stat-label">印记</div>
+                <div className="stat-label">心法</div>
               </div>
             </div>
           </section>
 
           <section className="posts-section">
             <div className="section-header">
-              <h2 className="section-title">文章</h2>
+              <h2 className="section-title">习武录</h2>
             </div>
 
             {posts.length === 0 ? (
               <div className="empty-state">
                 <div className="empty-icon">剑</div>
-                <p className="empty-title">尚无篇章</p>
-                <p className="empty-desc">于 content/posts 目录下添加文章</p>
+                <p className="empty-title">暂无剑谱</p>
+                <p className="empty-desc">请于 content/posts 添加</p>
               </div>
             ) : (
               <CategoryFilter posts={posts} />
@@ -80,7 +85,7 @@ export default function Home() {
 
         <footer className="footer">
           <div className="footer-content">
-            <p>墨剑阁 © {new Date().getFullYear()}</p>
+            <p>诗剑行 © {new Date().getFullYear()}</p>
             <p className="footer-sub">Next.js</p>
           </div>
         </footer>
