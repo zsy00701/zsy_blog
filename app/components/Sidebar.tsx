@@ -15,31 +15,16 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 900);
-    };
-    
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const check = () => setIsMobile(window.innerWidth <= 900);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
-
-  const handleLinkClick = () => {
-    if (isMobile) {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <>
@@ -60,10 +45,13 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
         />
       )}
 
-      <aside className={`sidebar ${isOpen ? "open" : ""}`} onClick={handleLinkClick}>
+      <aside 
+        className={`sidebar ${isOpen ? "open" : ""}`} 
+        onClick={() => isMobile && setIsOpen(false)}
+      >
         <div className="sidebar-header">
-          <div className="sidebar-title">目录</div>
-          <div className="sidebar-subtitle">CONTENTS</div>
+          <div className="sidebar-title">卷轴</div>
+          <div className="sidebar-subtitle">SCROLLS</div>
         </div>
         <SidebarTree posts={posts} activeSlug={activeSlug} />
         {children}

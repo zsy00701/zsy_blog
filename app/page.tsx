@@ -20,7 +20,7 @@ export default function Home() {
         <header className="header">
           <div className="header-content">
             <Link href="/" className="logo">
-              墨 · 笔记
+              墨剑阁
             </Link>
             <div className="header-right">
               <SearchBox posts={posts} />
@@ -35,25 +35,28 @@ export default function Home() {
 
         <div className="content-wrapper">
           <section className="hero-section">
-            <div className="hero-badge">学海无涯</div>
+            <div className="hero-badge">十年磨一剑</div>
             <h1 className="hero-title">
-              以笔为剑，<span>以墨铸魂</span>
+              笔落惊风雨<br/>
+              <span>诗成泣鬼神</span>
             </h1>
             <p className="hero-subtitle">
-              记录思考的痕迹，留下成长的墨迹
+              以代码为剑，以笔墨铸魂<br/>
+              记录技术修行之路
             </p>
+            <div className="hero-divider"></div>
             <div className="hero-stats">
               <div className="stat-item">
                 <div className="stat-number">{posts.length}</div>
-                <div className="stat-label">篇</div>
+                <div className="stat-label">篇章</div>
               </div>
               <div className="stat-item">
                 <div className="stat-number">{categories.size}</div>
-                <div className="stat-label">类</div>
+                <div className="stat-label">卷轴</div>
               </div>
               <div className="stat-item">
                 <div className="stat-number">{allTags.size}</div>
-                <div className="stat-label">签</div>
+                <div className="stat-label">印记</div>
               </div>
             </div>
           </section>
@@ -65,9 +68,9 @@ export default function Home() {
 
             {posts.length === 0 ? (
               <div className="empty-state">
-                <div className="empty-icon">墨</div>
-                <p className="empty-title">尚无文章</p>
-                <p className="empty-desc">在 content/posts 目录下添加 Markdown 文件</p>
+                <div className="empty-icon">剑</div>
+                <p className="empty-title">尚无篇章</p>
+                <p className="empty-desc">于 content/posts 目录下添加文章</p>
               </div>
             ) : (
               <CategoryFilter posts={posts} />
@@ -77,7 +80,7 @@ export default function Home() {
 
         <footer className="footer">
           <div className="footer-content">
-            <p>© {new Date().getFullYear()}</p>
+            <p>墨剑阁 © {new Date().getFullYear()}</p>
             <p className="footer-sub">Next.js</p>
           </div>
         </footer>

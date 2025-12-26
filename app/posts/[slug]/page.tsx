@@ -15,22 +15,14 @@ import { SearchBox } from '@/app/components/SearchBox';
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
   const allPosts = getAllPosts();
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
   const content = await markdownToHtml(post.content);
   const toc = extractToc(content);
@@ -48,9 +40,7 @@ export default async function PostPage({
         <main className="main-content main-content-with-toc">
           <header className="header">
             <div className="header-content">
-              <Link href="/" className="logo">
-                墨 · 笔记
-              </Link>
+              <Link href="/" className="logo">墨剑阁</Link>
               <div className="header-right">
                 <SearchBox posts={allPosts} />
                 <nav className="nav">
@@ -64,11 +54,9 @@ export default async function PostPage({
 
           <div className="article-layout">
             <div className="content-wrapper">
-              <Link href="/" className="back-link">
-                ← 返回
-              </Link>
+              <Link href="/" className="back-link">← 返回</Link>
 
-              <article className="article">
+              <article>
                 <div className="post-header">
                   <div className="post-header-meta">
                     <span className="post-category-badge">{post.category || '未分类'}</span>
@@ -76,10 +64,8 @@ export default async function PostPage({
                   </div>
                   <h1 className="post-title">{post.title}</h1>
                   <div className="post-info">
-                    <span className="post-date">
-                      {format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}
-                    </span>
-                    <span className="post-words">{wordCount.toLocaleString()} 字</span>
+                    <span>{format(new Date(post.date), 'yyyy年MM月dd日', { locale: zhCN })}</span>
+                    <span>{wordCount.toLocaleString()} 字</span>
                   </div>
                   {post.tags && post.tags.length > 0 && (
                     <div className="post-tags">
@@ -90,10 +76,7 @@ export default async function PostPage({
                   )}
                 </div>
 
-                <div
-                  className="post-content"
-                  dangerouslySetInnerHTML={{ __html: content }}
-                />
+                <div className="post-content" dangerouslySetInnerHTML={{ __html: content }} />
 
                 <RelatedPosts currentPost={post} allPosts={allPosts} />
               </article>
@@ -104,7 +87,7 @@ export default async function PostPage({
 
           <footer className="footer">
             <div className="footer-content">
-              <p>© {new Date().getFullYear()}</p>
+              <p>墨剑阁 © {new Date().getFullYear()}</p>
               <p className="footer-sub">Next.js</p>
             </div>
           </footer>
