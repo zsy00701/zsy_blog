@@ -10,22 +10,22 @@ export type TreeNode = {
   children: TreeNode[];
 };
 
-// 分类图标映射
+// 分类图标映射 - 诗剑行风格
 const categoryIcons: Record<string, string> = {
-  "多模态大模型": "🤖",
-  "大语言模型": "💬",
+  "多模态大模型": "🎨",
+  "大语言模型": "📜",
   "machine_learning": "🧠",
-  "计算机系统原理": "💻",
-  "LLMAPP": "🚀",
-  "科研第一步": "🔬",
+  "计算机系统原理": "💾",
+  "LLMAPP": "🛠️",
+  "科研第一步": "🔍",
   "roadmap": "🗺️",
   "Network": "🌐",
   "环境配置": "⚙️",
-  "未分类": "📄",
+  "未分类": "📦",
 };
 
 function getCategoryIcon(name: string): string {
-  return categoryIcons[name] || "📁";
+  return categoryIcons[name] || "📂";
 }
 
 function TreeBranch({
@@ -48,50 +48,42 @@ function TreeBranch({
 
   const [expanded, setExpanded] = useState(hasActiveChild || depth === 0);
   const hasChildren = node.children.length > 0 || node.posts.length > 0;
-  const totalCount = node.posts.length + node.children.reduce((sum, c) => {
+  
+  // 计算总文章数
+  const totalCount = useMemo(() => {
     const countAll = (n: TreeNode): number => 
       n.posts.length + n.children.reduce((s, ch) => s + countAll(ch), 0);
-    return sum + countAll(c);
-  }, 0);
+    return node.posts.length + node.children.reduce((sum, c) => sum + countAll(c), 0);
+  }, [node]);
 
   return (
     <div className="tree-node">
       <div
-        className={`tree-branch-header ${hasActiveChild ? "has-active" : ""}`}
+        className={`tree-branch-header ${hasActiveChild ? "has-active" : ""} ${expanded ? "expanded" : ""}`}
         onClick={(e) => {
           e.stopPropagation();
-          if (hasChildren) {
-            setExpanded((v) => !v);
-          }
+          if (hasChildren) setExpanded((v) => !v);
         }}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            if (hasChildren) setExpanded((v) => !v);
-          }
-        }}
       >
         <span className={`folder-toggle ${expanded ? "expanded" : ""}`}>
-          {hasChildren ? "▸" : ""}
+          {hasChildren ? "▶" : "•"}
         </span>
         <span className="folder-icon">{getCategoryIcon(node.name)}</span>
         <span className="folder-name">{node.name}</span>
         <span className="count-badge">{totalCount}</span>
       </div>
 
-      <div className={`tree-children ${expanded ? "expanded" : ""}`}>
-        {node.posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/posts/${post.slug}`}
-            className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
-          >
-            <span className="nav-item-icon">📝</span>
-            <span className="nav-item-title">{post.title}</span>
-          </Link>
-        ))}
+      <div 
+        className="tree-children"
+        style={{ 
+          maxHeight: expanded ? '2000px' : '0',
+          opacity: expanded ? 1 : 0,
+          overflow: 'hidden',
+          transition: 'all 0.3s ease-in-out'
+        }}
+      >
         {node.children.map((child) => (
           <TreeBranch
             key={`${node.name}-${child.name}-${depth}`}
@@ -99,6 +91,16 @@ function TreeBranch({
             depth={depth + 1}
             activeSlug={activeSlug}
           />
+        ))}
+        {node.posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/posts/${post.slug}`}
+            className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
+          >
+            <span className="post-icon">⚔️</span>
+            <span className="nav-item-title">{post.title}</span>
+          </Link>
         ))}
       </div>
     </div>
@@ -152,10 +154,6 @@ export function SidebarTree({
 
   return (
     <nav className="sidebar-nav">
-      <div className="sidebar-nav-header">
-        <span className="sidebar-nav-title">文档目录</span>
-        <span className="sidebar-nav-count">{posts.length} 篇</span>
-      </div>
       <div className="nav-section">
         {tree.children.map((child) => (
           <TreeBranch
