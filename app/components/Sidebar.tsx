@@ -26,6 +26,17 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  const handleSidebarClick = (e: React.MouseEvent) => {
+    // 只在移动端且点击的是链接时关闭侧边栏
+    if (isMobile) {
+      const target = e.target as HTMLElement;
+      // 检查是否点击了链接或链接内的元素
+      if (target.tagName === 'A' || target.closest('a')) {
+        setIsOpen(false);
+      }
+    }
+  };
+
   return (
     <>
       {isMobile && (
@@ -53,7 +64,7 @@ export function Sidebar({ posts, activeSlug, children }: SidebarProps) {
 
       <aside 
         className={`sidebar ${isOpen ? "open" : ""}`} 
-        onClick={() => isMobile && setIsOpen(false)}
+        onClick={handleSidebarClick}
       >
         <div className="sidebar-header">
           <div className="sidebar-title">藏经阁</div>
