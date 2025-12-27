@@ -49,7 +49,7 @@ export function CategoryFilter({ posts }: CategoryFilterProps) {
           <button
             key={cat}
             className={`category-tab ${selectedCategory === cat ? "active" : ""}`}
-            onClick={() => handleCategoryClick(selectedCategory === cat ? null : cat)}
+            onClick={() => handleCategoryClick(cat)}
           >
             {cat} <span className="category-tab-count">{count}</span>
           </button>
