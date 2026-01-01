@@ -67,3 +67,17 @@
 
 ## Knapsack Problem
 
+![Img 9](https://raw.githubusercontent.com/zsy00701/typora-images/main/ADS_ch11_img9.png)
+
+### K-center Problem
+
+![Img 7](https://raw.githubusercontent.com/zsy00701/typora-images/main/ADS_ch11_img7.png)
+
+
+
+![Img 8](https://raw.githubusercontent.com/zsy00701/typora-images/main/ADS_ch11_img8.png)
+
+> 除非 P=NP*P*=*NP*，否则没有满足 ρ<2*ρ*<2 的 ρ*ρ*-approximation 解决 center-selection problem
+
+### Vertex Cover Problem
+
