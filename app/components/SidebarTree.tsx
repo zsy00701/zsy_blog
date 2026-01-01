@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import type { Post } from "@/lib/posts";
 
 export type TreeNode = {
@@ -17,10 +17,18 @@ const categoryIcons: Record<string, string> = {
   "machine_learning": "🧠",
   "计算机系统原理": "💾",
   "LLMAPP": "🛠️",
+  "LLM": "🤖",
   "科研第一步": "🔍",
   "roadmap": "🗺️",
   "Network": "🌐",
   "环境配置": "⚙️",
+  "人工智能基础": "🎯",
+  "ads": "📊",
+  "ASM": "🔧",
+  "Math": "📐",
+  "OOP": "💎",
+  "高中数学": "📚",
+  "产生的问题与解决": "💡",
   "未分类": "📦",
 };
 
@@ -32,11 +40,15 @@ function TreeBranch({
   node,
   depth = 0,
   activeSlug,
+  isLast = false,
 }: {
   node: TreeNode;
   depth?: number;
   activeSlug?: string;
+  isLast?: boolean;
 }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  
   // 检查是否有活跃的子项
   const hasActiveChild = useMemo(() => {
     const checkActive = (n: TreeNode): boolean => {
@@ -56,8 +68,15 @@ function TreeBranch({
     return node.posts.length + node.children.reduce((sum, c) => sum + countAll(c), 0);
   }, [node]);
 
+  // 当有活跃子项时自动展开
+  useEffect(() => {
+    if (hasActiveChild) {
+      setExpanded(true);
+    }
+  }, [hasActiveChild]);
+
   return (
-    <div className="tree-node">
+    <div className={`tree-node ${isLast ? 'tree-node-last' : ''}`}>
       <div
         className={`tree-branch-header ${hasActiveChild ? "has-active" : ""} ${expanded ? "expanded" : ""}`}
         onClick={(e) => {
@@ -66,42 +85,66 @@ function TreeBranch({
         }}
         role="button"
         tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (hasChildren) setExpanded((v) => !v);
+          }
+        }}
       >
         <span className={`folder-toggle ${expanded ? "expanded" : ""}`}>
-          {hasChildren ? "▶" : "•"}
+          {hasChildren ? (
+            <svg 
+              className="toggle-arrow" 
+              width="10" 
+              height="10" 
+              viewBox="0 0 10 10"
+              fill="currentColor"
+            >
+              <path d="M3 2 L7 5 L3 8 Z" />
+            </svg>
+          ) : (
+            <span className="toggle-dot">•</span>
+          )}
         </span>
         <span className="folder-icon">{getCategoryIcon(node.name)}</span>
         <span className="folder-name">{node.name}</span>
-        <span className="count-badge">{totalCount}</span>
+        <span className="count-badge">
+          <span className="count-number">{totalCount}</span>
+        </span>
       </div>
 
       <div 
-        className="tree-children"
-        style={{ 
-          maxHeight: expanded ? '2000px' : '0',
-          opacity: expanded ? 1 : 0,
-          overflow: 'hidden',
-          transition: 'all 0.3s ease-in-out'
-        }}
+        ref={contentRef}
+        className={`tree-children ${expanded ? 'expanded' : 'collapsed'}`}
       >
-        {node.children.map((child) => (
-          <TreeBranch
-            key={`${node.name}-${child.name}-${depth}`}
-            node={child}
-            depth={depth + 1}
-            activeSlug={activeSlug}
-          />
-        ))}
-        {node.posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/posts/${post.slug}`}
-            className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
-          >
-            <span className="post-icon">⚔️</span>
-            <span className="nav-item-title">{post.title}</span>
-          </Link>
-        ))}
+        <div className="tree-children-inner">
+          {node.children.map((child, index) => (
+            <TreeBranch
+              key={`${node.name}-${child.name}-${depth}`}
+              node={child}
+              depth={depth + 1}
+              activeSlug={activeSlug}
+              isLast={index === node.children.length - 1 && node.posts.length === 0}
+            />
+          ))}
+          {node.posts.map((post, index) => (
+            <Link
+              key={post.slug}
+              href={`/posts/${post.slug}`}
+              className={`nav-item ${post.slug === activeSlug ? "active" : ""}`}
+            >
+              <span className="post-line-indicator" />
+              <span className="post-icon">
+                {post.slug === activeSlug ? "⚔️" : "📄"}
+              </span>
+              <span className="nav-item-title">{post.title}</span>
+              {post.slug === activeSlug && (
+                <span className="active-indicator" />
+              )}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -152,15 +195,23 @@ export function SidebarTree({
     return sortTree(root);
   }, [posts]);
 
+  // 计算总文章数
+  const totalPosts = posts.length;
+
   return (
     <nav className="sidebar-nav">
       <div className="nav-section">
-        {tree.children.map((child) => (
+        <div className="nav-section-stats">
+          <span className="stats-icon">📚</span>
+          <span className="stats-text">共 {totalPosts} 篇秘籍</span>
+        </div>
+        {tree.children.map((child, index) => (
           <TreeBranch
             key={child.name}
             node={child}
             depth={0}
             activeSlug={activeSlug}
+            isLast={index === tree.children.length - 1}
           />
         ))}
       </div>
