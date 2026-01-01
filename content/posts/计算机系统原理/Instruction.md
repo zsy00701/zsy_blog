@@ -1,9 +1,7 @@
 ---
-title: '-instruction'
+title: 指令集架构
 date: '2025-12-24T17:49:21.282Z'
-excerpt: >-
-  ## 概念梳理 - PC: Program Counter (当前正在执行的指令地址) - ra：return address (x1) ##
-  Instruction Set > Different computers have different instruction set…
+excerpt: RISC-V 指令集的基本概念与操作
 category: 计算机系统原理
 ---
 ## 概念梳理

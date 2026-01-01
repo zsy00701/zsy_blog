@@ -1,11 +1,8 @@
 ---
-title: '-rope'
+title: RoPE 旋转位置编码
 date: '2025-12-24T17:49:21.280Z'
-excerpt: >-
-  ## 1.Introduction > Rotary Position Embedding
-  **核心思想：**通过旋转矩阵来编码绝对位置，使得在计算注意力（Attention）时，其结果自然包含相对位置信息。 RoPE 的目标是寻找一个变换
-  $f(\mathbf{x}, m)$（…
-category: 大语言模型
+excerpt: 通过旋转矩阵编码绝对位置，使注意力计算自然包含相对位置信息
+category: LLM
 ---
 ## 1.Introduction
 

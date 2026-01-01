@@ -1,10 +1,7 @@
 ---
-title: llmapp-langchain
+title: LangChain 框架详解
 date: '2025-12-24T17:49:21.267Z'
-excerpt: >-
-  > 用于开发由LLM驱动的应用程序的开源框架 ## 六大核心组件 ### Model I/O -
-  **Prompts（提示词模板）**：预设好格式，让你只需要填入变量（如：“请帮我把{text}翻译成中文”）。 -
-  **Models（模型接口）**：统一了不同厂商（OpenAI,…
+excerpt: LLM 应用开发的六大核心组件与使用方法
 category: LLMAPP
 ---
 > 用于开发由LLM驱动的应用程序的开源框架

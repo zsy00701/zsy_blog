@@ -1,9 +1,7 @@
 ---
-title: '-intro'
+title: 计算机系统原理概述
 date: '2025-12-24T17:49:21.283Z'
-excerpt: >-
-  ## Classes of Computers - Personal computers(个人 PC) 1. General purpose，variety
-  of software 2. subject to cost/performance tradeoff - Server …
+excerpt: 计算机分类、性能度量与处理器发展
 category: 计算机系统原理
 ---
 ## Classes of Computers

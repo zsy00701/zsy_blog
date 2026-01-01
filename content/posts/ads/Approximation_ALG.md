@@ -1,3 +1,9 @@
+---
+title: 近似算法
+date: '2026-01-01T10:46:33.226Z'
+excerpt: PTAS、FPTAS 与近似比分析
+category: ads
+---
 ## 一些概念
 
 ### PTAS (多项式时间近似模式)

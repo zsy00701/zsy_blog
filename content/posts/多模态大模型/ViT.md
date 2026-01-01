@@ -1,10 +1,7 @@
 ---
-title: '-vit'
+title: ViT 视觉 Transformer
 date: '2025-12-17T02:39:00.590Z'
-excerpt: >-
-  ## Vision Transformer的架构
-  ![image-20251217010249693](/Users/zhoushengyao/Library/Application
-  Support/typora-user-images/image-202512170102496…
+excerpt: Vision Transformer 架构详解与实现细节
 category: 多模态大模型
 ---
 ## Vision Transformer的架构

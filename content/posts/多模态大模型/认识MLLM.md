@@ -1,9 +1,7 @@
 ---
-title: '-mllm'
+title: 认识 MLLM
 date: '2025-12-17T02:39:00.591Z'
-excerpt: >-
-  ## Data Modalities > One data mode can be represented or approximated in
-  another data mode **For example**; - Audio->Image - Speech->Text(lo…
+excerpt: 多模态大语言模型的数据模态与基本概念
 category: 多模态大模型
 ---
 ## Data Modalities
@@ -23,6 +21,28 @@ category: 多模态大模型
 - Speech->Text(lose information such as volume ,intonation, pauses,etc)
 - Image->Vector
 - So on
+
+![image-20260101202223803](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101202223803.png)
+
+![image-20260101202341999](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101202341999.png)
+
+![image-20260101202658206](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101202658206.png)
+
+![image-20260101202721380](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101202721380.png)
+
+![image-20260101202918908](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101202918908.png)
+
+
+
+
+
+![image-20260101203819170](https://raw.githubusercontent.com/zsy00701/typora-images/main/image-20260101203819170.png)
+
+
+
+
+
+
 
 ## LLava
 

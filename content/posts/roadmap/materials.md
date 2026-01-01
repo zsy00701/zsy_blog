@@ -1,9 +1,7 @@
 ---
-title: roadmap-materials
+title: 学习资料汇总
 date: '2025-12-17T02:39:00.587Z'
-excerpt: >-
-  ## 深度学习基础 1. [pytorch实用教程](https://tingsongyu.github.io/PyTorch-Tutorial-2nd/)
-  ## LLM相关资料 1. [小红书大模型算法相关资料](https://ucnw8805gmdh.feishu.cn/d…
+excerpt: 深度学习、LLM、多模态等方向的优质学习资源整理
 category: roadmap
 ---
 ## 深度学习基础

@@ -1,9 +1,7 @@
 ---
-title: roadmap-vlmmllm
+title: VLM/MLLM 学习路线
 date: '2025-12-17T02:39:00.588Z'
-excerpt: >-
-  ## 读survey > [A Comprehensive Survey and Guide to Multimodal Large Language
-  Models in Vision-Language Tasks](https://arxiv.org/pdf/2411.0628…
+excerpt: 多模态大语言模型的 Survey 和论文阅读指南
 category: roadmap
 ---
 ## 读survey

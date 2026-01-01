@@ -1,3 +1,9 @@
+---
+title: KV Cache 详解
+date: '2026-01-01T10:46:33.219Z'
+excerpt: 大语言模型推理阶段最重要的基础优化技术
+category: LLM
+---
 > **KV Cache (Key-Value Cache)** 是大语言模型（LLM）推理（Inference）阶段最重要、最基础的优化技术。
 
 ## 为什么需要KV Cache

@@ -528,15 +528,195 @@ h1, h2, h3, h4 {
   margin-bottom: 2rem;
 }
 
+/* 面包屑导航 */
+.category-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-sharp);
+}
+
+.breadcrumb-item:hover {
+  color: var(--sword-cyan);
+  background: var(--sword-pale);
+}
+
+.breadcrumb-item.active {
+  color: var(--sword-cyan);
+  font-weight: 500;
+  background: var(--sword-pale);
+}
+
+.breadcrumb-icon {
+  font-size: 0.9rem;
+}
+
+.breadcrumb-segment {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-separator {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0 0.25rem;
+}
+
+/* 分类卡片网格 */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-sharp);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--sword-pale), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-sharp);
+}
+
+.category-card:hover {
+  border-color: var(--sword-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.15);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-card-back {
+  border-style: dashed;
+  color: var(--text-muted);
+}
+
+.category-card-back:hover {
+  color: var(--sword-cyan);
+}
+
+.category-card-icon {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-sharp);
+}
+
+.category-card:hover .category-card-icon {
+  transform: scale(1.15);
+}
+
+.category-card-name {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-card-count {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  background: var(--sword-pale);
+  color: var(--sword-cyan);
+  border-radius: 10px;
+  font-family: monospace;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-sharp);
+}
+
+.category-card:hover .category-card-count {
+  background: var(--sword-cyan);
+  color: white;
+}
+
+.category-card-arrow {
+  font-size: 1rem;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-sharp);
+}
+
+.category-card.has-children:hover .category-card-arrow {
+  color: var(--sword-cyan);
+  transform: translateX(3px);
+}
+
+/* 过滤状态 */
 .filter-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 1rem 1.5rem;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, var(--sword-pale), transparent);
   border-left: 3px solid var(--sword-cyan);
   color: var(--sword-cyan);
   font-size: 0.9rem;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 8px 8px 0;
   animation: slideInLeft 0.3s ease-out;
+}
+
+.filter-status-icon {
+  font-size: 1rem;
+}
+
+.filter-status-hint {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* 子分类路径标签 */
+.category-path-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  background: var(--border-light);
+  border-radius: 4px;
 }
 
 @keyframes slideInLeft {
@@ -547,6 +727,25 @@ h1, h2, h3, h4 {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+/* 响应式分类网格 */
+@media (max-width: 600px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .category-card {
+    padding: 0.75rem;
+  }
+  
+  .category-card-name {
+    font-size: 0.8rem;
+  }
+  
+  .category-breadcrumb {
+    padding: 0.75rem 1rem;
   }
 }
 

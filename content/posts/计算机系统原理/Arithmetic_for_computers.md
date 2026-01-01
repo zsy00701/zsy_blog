@@ -1,7 +1,7 @@
 ---
-title: '-arithmetic_for_computers'
+title: 计算机算术运算
 date: '2025-12-26T05:46:39.195Z'
-excerpt: '# Arithmetic for Computers'
+excerpt: 加法器、乘法器与浮点运算的硬件实现
 category: 计算机系统原理
 ---
 # Arithmetic for Computers

@@ -1,3 +1,8 @@
+---
+title: NP 完全性问题
+date: '2026-01-01T10:46:33.227Z'
+category: ads
+---
 ## 判定问题与最优化问题[¶](https://wintermelonc.github.io/WintermelonC_Docs/zju/compulsory_courses/ADS/ch10/#1-判定问题与最优化问题)
 
 很多问题都是 **最优化问题**（optimization problem）。然而 NP 完全性不适合应用于最优化问题，但适合用于 **判定问题**（decision problem），因为这种问题的答案是简单的“是”或“否”。通常，我们可以将一个给定的最优化问题转化为一个相关的判定问题

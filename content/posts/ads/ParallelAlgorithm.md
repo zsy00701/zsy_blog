@@ -1,3 +1,9 @@
+---
+title: 并行算法
+date: '2026-01-01T10:46:33.227Z'
+excerpt: Work-Depth 模型与 PRAM 并行计算
+category: ads
+---
 ### 1. 核心评估模型：Work-Depth Model
 
 在 PRAM (Parallel Random Access Machine) 模型中，我们主要关注两个指标：
