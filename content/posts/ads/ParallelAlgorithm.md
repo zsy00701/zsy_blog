@@ -186,9 +186,11 @@ $$T_p \le \frac{W}{p} + D$$
 
   ![Img 13](https://raw.githubusercontent.com/zsy00701/typora-images/main/ADS_ch14_img13.png)
 
-  > ** 14.5 & 14.7 解析：**
+  > 14.5 & 14.7 解析：
   >
   > - **14.5:** Random Sampling 可以达到 $T=O(1)$ 且 $W=O(n)$ (概率性)。**True**。
   > - **14.7:** 串行最快 $O(n)$ (A错)；并行可以 $O(1)$ (B错)；Partition 无法减少 Depth (C错)；**D 是正确的**，描述了随机采样的性能。
-
-  ### 
+  >
+  > 
+  
+  

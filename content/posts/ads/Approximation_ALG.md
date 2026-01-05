@@ -87,3 +87,31 @@ category: ads
 
 ### Vertex Cover Problem
 
+~~~cpp
+C = ∅
+E' = G.E
+while (E' != ∅) {
+    let (u,v) be an arbitrary edge of E'
+    C = C ∪ {u,v}
+    remove form E' every edge incident on either u or v
+}
+return C
+~~~
+
+> 此算法是一个多项式时间的2-approximation algorithm
+
+### Travelling Salesman problem
+
+###### 满足三角不等式的旅行商问题
+
+> 这是一个 **NP-完全 (NP-Complete)** 问题。
+
+~~~cpp
+ select a vertex r∈G.V to be a "root" vertex
+compute a minimum spanning tree T for G from root r
+    using MST-PRIM(G,c,r)
+let H be a list of vertices, ordered according to when they are first visited
+    in a preorder tree walk of T
+return the hamiltonian cycle H
+~~~
+
